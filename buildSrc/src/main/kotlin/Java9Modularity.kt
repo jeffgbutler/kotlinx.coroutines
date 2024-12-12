@@ -32,6 +32,7 @@ object Java9Modularity {
     abstract class ProcessModuleInfoFile : DefaultTask() {
         @get:InputFile
         @get:NormalizeLineEndings
+        @get:PathSensitive(PathSensitivity.RELATIVE)
         abstract val moduleInfoFile: RegularFileProperty
 
         @get:OutputFile
