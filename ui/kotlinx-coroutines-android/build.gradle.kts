@@ -50,10 +50,10 @@ tasks.test {
     dependsOn(runR8)
     dependsOn(runR8NoOptim)
 
-    inputs.files(optimizedDexFile, unOptimizedDexFile)
+    inputs.files(optimizedDexFile, unOptimizedDexFile).withPropertyName("dexFiles").withNormalizer(ClasspathNormalizer::class.java)
 
-    systemProperty("dexPath", optimizedDexFile.absolutePath)
-    systemProperty("noOptimDexPath", unOptimizedDexFile.absolutePath)
+    systemProperty("dexPath", project.relativePath(optimizedDexFile.absolutePath))
+    systemProperty("noOptimDexPath", project.relativePath(unOptimizedDexFile.absolutePath))
 
     // Output custom metric with the size of the optimized dex
     doLast {
